@@ -1,23 +1,10 @@
-function [AUC] = LDSR( X, label, outLabel, ...
-                              lambda1, alpha, beta)
+function [AUC] = LDSR( X, outLabel, lambda1, alpha, beta)
 
 nv = length(X);
 
 max_mu = 1e10;
 mu = 1e-4;
 rho = 1.3;
-
-
-n_c = zeros(1,length(unique(label)));
-for i = 1:length(unique(label))
-    indi = find(label==i);
-    n_c(i) = length(indi);
-end
-
-Ublk = ones(n_c(1));
-for i = 2:length(n_c)
-    Ublk = blkdiag(Ublk, ones(n_c(i)));
-end
 
 x_dims = zeros(nv, 1);
 ns = size(X{1},2);
